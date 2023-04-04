@@ -1,0 +1,14 @@
+.estilosNavbar {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+  justify-content: space-between;
+  background-color: rgb(0, 0, 0);
+}
+
+.estilosSeccion {
+  list-style: none;
+  font-weight: bold;
+  font-style: italic;
+  color: aliceblue;
+}
