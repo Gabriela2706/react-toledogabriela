@@ -1,38 +1,25 @@
-import {
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  CardMedia,
-  Typography,
-} from "@mui/material";
-import { Link } from "react-router-dom";
+import { Card, CardMedia, Typography } from "@mui/material";
+import { ContadorContainer } from "../Contador/ContadorContainer";
 
-export const ItemDetail = ({ detalle }) => {
+export const ItemDetail = ({ detalle, agregarItem }) => {
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
+      <div style={{ display: "flex", flexDirection: "column" }}>
+        <Typography gutterBottom variant="h1" component="div">
+          {detalle.title}
+        </Typography>
+        <div style={{ display: "flex" }}>
+          <h4>{detalle.descripciondetalle}</h4>
+        </div>
+      </div>
+
       <div style={{ marginTop: "30px" }} key={detalle.id}>
         <Card sx={{ maxWidth: 345, height: 550 }}>
           <CardMedia sx={{ height: 380 }} image={detalle.img} />
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
-              {detalle.title}
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              {detalle.descripcion}
-            </Typography>
-          </CardContent>
-          <Link to={"/detailcart"} style={{ textDecoration: "none" }}>
-            <CardActions
-              style={{
-                display: "flex",
-                justifyContent: "center",
-              }}
-            >
-              <Button variant="contained">Agregar al carrito</Button>
-            </CardActions>
-          </Link>
         </Card>
+      </div>
+      <div>
+        <ContadorContainer stock={detalle.stock} agregarItem={agregarItem} />
       </div>
     </div>
   );
