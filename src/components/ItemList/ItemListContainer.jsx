@@ -7,7 +7,6 @@ const ItemListContainer = () => {
   const [items, setItems] = useState([]);
 
   const { nombre } = useParams();
-  console.log(nombre);
 
   useEffect(() => {
     const filtradoCategorias = stockProductos.filter(

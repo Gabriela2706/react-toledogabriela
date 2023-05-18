@@ -4,10 +4,10 @@ import { Navbar } from "./components/Navbar/Navbar";
 import ItemListContainer from "./components/ItemList/ItemListContainer";
 import Inicio from "./components/Inicio/Inicio";
 
-import DetailCart from "./components/CarritoDetalle/DetailCart";
 import { ItemDetailContainer } from "./components/ItemDetail/ItemDetailContainer";
 import { FormularioContainer } from "./components/Formulario/FormularioContainer";
 import { CartContextProvider } from "./context/CartContext";
+import { DetailCart } from "./components/CarritoDetalle/DetailCart";
 
 function App() {
   return (
