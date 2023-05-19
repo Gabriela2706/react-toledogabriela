@@ -1,8 +1,23 @@
 import { FinDeLaCompra } from "./FinDeLaCompra";
 import { useFormik } from "formik";
+import { useContext } from "react";
 import * as Yup from "yup";
+import { CartContext } from "../../context/CartContext";
+import { database } from "../../firebaseConfig";
+import { addDoc, collection } from "firebase/firestore";
 
 export const FinDeLaCompraContainer = () => {
+  const { cart, obtenerTotalCarrito } = useContext(CartContext);
+
+  const checkout = (datos) => {
+    let ordenDeCompra = {
+      buyer: datos,
+      items: cart,
+      total: obtenerTotalCarrito,
+    };
+    const ordersCollection = collection(database, "ordenes");
+    addDoc(ordersCollection, ordenDeCompra).then((res) => console.log(res.id));
+  };
   const { handleChange, handleSubmit, errors } = useFormik({
     initialValues: {
       nombre: "",
@@ -10,9 +25,7 @@ export const FinDeLaCompraContainer = () => {
       email: "",
       telefono: "",
     },
-    onSubmit: (datos) => {
-      console.log(datos);
-    },
+    onSubmit: checkout,
     validationSchema: Yup.object().shape({
       nombre: Yup.string()
         .required("Este campo es obligatorio")
