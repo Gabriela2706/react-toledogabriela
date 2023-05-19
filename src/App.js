@@ -9,6 +9,8 @@ import { FormularioContainer } from "./components/Formulario/FormularioContainer
 import { CartContextProvider } from "./context/CartContext";
 import { DetailCart } from "./components/CarritoDetalle/DetailCart";
 
+import { FinDeLaCompraContainer } from "./components/FinDeLaCompra/FinDeLaCompraContainer";
+
 function App() {
   return (
     <BrowserRouter>
@@ -21,6 +23,7 @@ function App() {
             <Route path="/itemdetail/:id" element={<ItemDetailContainer />} />
             <Route path="/detailcart" element={<DetailCart />} />
             <Route path="/formulario" element={<FormularioContainer />} />
+            <Route path="/findelacompra" element={<FinDeLaCompraContainer />} />
           </Route>
         </Routes>
       </CartContextProvider>

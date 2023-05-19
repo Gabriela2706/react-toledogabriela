@@ -1,7 +1,8 @@
-import { stockProductos } from "../../productsMock";
 import { useEffect, useState } from "react";
 import { ItemList } from "./ItemList";
 import { useParams } from "react-router-dom";
+import { database } from "../../firebaseConfig";
+import { getDocs, collection, query, where } from "firebase/firestore";
 
 const ItemListContainer = () => {
   const [items, setItems] = useState([]);
@@ -9,15 +10,29 @@ const ItemListContainer = () => {
   const { nombre } = useParams();
 
   useEffect(() => {
-    const filtradoCategorias = stockProductos.filter(
-      (stock) => stock.categoria === nombre
-    );
-    //declaro la promesa y le doy el resolve.
-    const promesa = new Promise((resolve, reject) => {
-      resolve(nombre ? filtradoCategorias : stockProductos);
-    });
+    let eleccion;
+    const itemsCollection = collection(database, "stockProductos");
+    if (nombre) {
+      const itemsColecFiltrados = query(
+        itemsCollection,
+        where("categoria", "==", nombre)
+      );
+      eleccion = itemsColecFiltrados;
+    } else {
+      eleccion = itemsCollection;
+    }
 
-    promesa.then((res) => setItems(res)).catch((e) => console.log(e));
+    getDocs(eleccion)
+      .then((res) => {
+        const productos = res.docs.map((producto) => {
+          return {
+            ...producto.data(),
+            id: producto.id,
+          };
+        });
+        setItems(productos);
+      })
+      .catch((err) => console.log(err));
   }, [nombre]);
 
   return (

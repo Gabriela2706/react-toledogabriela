@@ -3,7 +3,7 @@ import { ContadorContainer } from "../Contador/ContadorContainer";
 
 export const ItemDetail = ({ detalle, agregarItem }) => {
   return (
-    <div>
+    <div style={{ marginBottom: 50 }}>
       <Typography gutterBottom variant="h3" component="div">
         Detalle del producto
       </Typography>
@@ -15,8 +15,12 @@ export const ItemDetail = ({ detalle, agregarItem }) => {
           <div style={{ display: "flex" }}>
             <h4>{detalle.descripciondetalle}</h4>
           </div>
-          <Card sx={{ maxWidth: 345, height: 550 }}>
-            <CardMedia image={detalle.img}></CardMedia>
+          <Card sx={{ maxWidth: 345, height: 500 }}>
+            <CardMedia
+              sx={{ height: 500 }}
+              image={detalle.img}
+              title="green iguana"
+            />
           </Card>
         </div>
 
