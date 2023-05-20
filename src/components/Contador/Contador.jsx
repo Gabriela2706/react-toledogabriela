@@ -11,7 +11,6 @@ export const Contador = ({ contador, sumarItem, restarItem, agregarItem }) => {
       style={{
         display: "flex",
         flexDirection: "column",
-        marginTop: 100,
       }}
     >
       <Fab

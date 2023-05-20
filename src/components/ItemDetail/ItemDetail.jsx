@@ -7,13 +7,22 @@ export const ItemDetail = ({ detalle, agregarItem }) => {
       <Typography gutterBottom variant="h3" component="div">
         Detalle del producto
       </Typography>
-      <div style={{ display: "flex", justifyContent: "center" }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "flex-end",
+        }}
+      >
         <div style={{ display: "flex", flexDirection: "column" }}>
           <Typography gutterBottom variant="h3" component="div">
             {detalle.title}
           </Typography>
           <div style={{ display: "flex" }}>
             <h4>{detalle.descripciondetalle}</h4>
+          </div>
+          <div>
+            <h4>Precio: ${detalle.precio}</h4>
           </div>
           <Card sx={{ maxWidth: 345, height: 500 }}>
             <CardMedia

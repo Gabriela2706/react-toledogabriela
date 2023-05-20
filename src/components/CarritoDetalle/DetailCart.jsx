@@ -16,7 +16,7 @@ export const DetailCart = () => {
       </Typography>
       {cart.map((detalle) => {
         return (
-          <div>
+          <div key={detalle.id}>
             <Grid container spacing={1}>
               <Grid item xs={2}>
                 <Card sx={{ maxWidth: 145, height: 200 }}>

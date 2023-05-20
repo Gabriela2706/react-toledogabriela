@@ -76,44 +76,11 @@ export const FinDeLaCompra = ({ handleChange, handleSubmit, errors }) => {
         </Grid>
       </form>
       <div style={{ margin: 30 }}>
-        <Typography gutterBottom variant="h4" component="div">
-          Pago con Tarjeta
-        </Typography>
-        <form action="">
-          <Grid container spacing={3}>
-            <Grid item xs={12} sm={6}>
-              {" "}
-              <TextField
-                label="Numero de Tarjeta"
-                color="secondary"
-                focused
-                fullWidth
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              {" "}
-              <TextField
-                label="Vencimiento"
-                color="secondary"
-                focused
-                fullWidth
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              {" "}
-              <TextField label="Titular" color="secondary" focused fullWidth />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              {" "}
-              <TextField label="Codigo" color="secondary" focused fullWidth />
-            </Grid>
-          </Grid>
-          <Grid>
-            <Button variant="contained" onClick={handleSubmit}>
-              Comprar
-            </Button>
-          </Grid>
-        </form>
+        <Grid>
+          <Button variant="contained" onClick={handleSubmit}>
+            Comprar
+          </Button>
+        </Grid>
       </div>
     </div>
   );

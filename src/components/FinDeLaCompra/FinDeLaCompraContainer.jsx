@@ -1,23 +1,45 @@
 import { FinDeLaCompra } from "./FinDeLaCompra";
 import { useFormik } from "formik";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import * as Yup from "yup";
 import { CartContext } from "../../context/CartContext";
 import { database } from "../../firebaseConfig";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, doc, updateDoc } from "firebase/firestore";
+import Swal from "sweetalert2";
 
 export const FinDeLaCompraContainer = () => {
-  const { cart, obtenerTotalCarrito } = useContext(CartContext);
+  const { cart, obtenerTotalCarrito, limpiarCarrito } = useContext(CartContext);
+  const [ordenId, setOrdenID] = useState(null);
+  const alertaFinCompra = () => {
+    Swal.fire({
+      title: "<strong> <u>Gracias por tu Compra</u></strong>",
+
+      html: `<b>Tu numero de orden es: ${ordenId} </b>, `,
+      icon: "success",
+    });
+  };
 
   const checkout = (datos) => {
+    let total = obtenerTotalCarrito();
+
     let ordenDeCompra = {
       buyer: datos,
       items: cart,
-      total: obtenerTotalCarrito,
+      total: total,
     };
     const ordersCollection = collection(database, "ordenes");
-    addDoc(ordersCollection, ordenDeCompra).then((res) => console.log(res.id));
+    addDoc(ordersCollection, ordenDeCompra).then((res) => setOrdenID(res.id));
+
+    cart.map((productos) =>
+      updateDoc(doc(database, "stockProductos", productos.id), {
+        stock: productos.stock - productos.quantity,
+      })
+    );
+
+    limpiarCarrito();
+    alertaFinCompra();
   };
+
   const { handleChange, handleSubmit, errors } = useFormik({
     initialValues: {
       nombre: "",
@@ -41,10 +63,11 @@ export const FinDeLaCompraContainer = () => {
   return (
     <div>
       <FinDeLaCompra
+        ordenId={ordenId}
         handleChange={handleChange}
         handleSubmit={handleSubmit}
         errors={errors}
-      />{" "}
+      />
     </div>
   );
 };
